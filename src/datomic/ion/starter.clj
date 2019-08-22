@@ -167,7 +167,7 @@ proxy integration."
 (defn add-item
   "Lambda ion that adds an item, returns database t."
   [{:keys [input]}]
-  (let [args (-> input json/read-str)
+  (let [args (json/read-str input)
         conn (get-connection)
         tx [(list* 'datomic.ion.starter/create-item args)]
         result (d/transact conn {:tx-data tx})]
